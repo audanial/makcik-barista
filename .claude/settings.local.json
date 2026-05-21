@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(dir \"c:\\\\Users\\\\amir umar danial\\\\makcik-barista\\\\public\\\\images\")"
     ]
   }
 }
