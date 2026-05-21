@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(npm run *)",
-      "Bash(dir \"c:\\\\Users\\\\amir umar danial\\\\makcik-barista\\\\public\\\\images\")"
+      "Bash(dir \"c:\\\\Users\\\\amir umar danial\\\\makcik-barista\\\\public\\\\images\")",
+      "Bash(npm install *)",
+      "Bash(Get-Content components/AnimateOnScroll.tsx)",
+      "Bash(Select-Object -First 5)",
+      "Bash(Write-Host \"---\")",
+      "Bash(Get-Content components/Navbar.tsx)",
+      "Bash(Select-Object -First 10)",
+      "Bash(Get-Content components/MenuCard.tsx)",
+      "Bash(Get-Content components/Footer.tsx)",
+      "Bash(Get-Content components/WhatsAppButton.tsx)"
     ]
   }
 }

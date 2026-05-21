@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+import { Coffee, Droplets, UtensilsCrossed, ChevronDown } from "lucide-react"
 import { waLink } from "@/lib/whatsapp"
 import { coffeeItems } from "@/lib/menuData"
 import MenuCard from "@/components/MenuCard"
+import AnimateOnScroll from "@/components/AnimateOnScroll"
 
 export const metadata: Metadata = {
   title: "MakCik Barista — Harom & Hirup",
@@ -21,19 +23,19 @@ const categories = [
     name: "Coffee",
     description: "Latte, Mocha, Americano & more",
     href: "/menu#coffee",
-    emoji: "☕",
+    Icon: Coffee,
   },
   {
     name: "Non-Coffee",
     description: "Shakes, Chocolate & Dirty Matcha",
     href: "/menu#non-coffee",
-    emoji: "🧋",
+    Icon: Droplets,
   },
   {
     name: "Food",
     description: "Nasi Lemak, Ramen & more at events",
     href: "/menu#food",
-    emoji: "🍱",
+    Icon: UtensilsCrossed,
   },
 ]
 
@@ -48,20 +50,23 @@ export default function HomePage() {
           src="/images/hero.jpeg"
           alt="MakCik Barista food truck"
           fill
-          className="object-cover"
+          className="object-cover object-center"
           priority
           unoptimized
         />
-        <div className="absolute inset-0 bg-[#2D5A27]/75" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1E3D1A]/60 via-[#1E3D1A]/50 to-[#1E3D1A]/80" />
+
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="font-heading text-7xl md:text-9xl italic mb-4">MakCik Barista</h1>
-          <p className="text-sm tracking-[0.3em] mb-8">HAROM &amp; HIRUP</p>
+          <h1 className="font-heading text-6xl md:text-8xl italic mb-4">MakCik Barista</h1>
+          <p className="tracking-[0.4em] text-xs md:text-sm uppercase text-white/80 mb-10">
+            Harom &amp; Hirup
+          </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <a
               href={waLink("Hi MakCik Barista! Saya nak order. Boleh tolong? 😊")}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white text-[#2D5A27] px-8 py-3 rounded-full font-medium hover:bg-[#F9F4EC] transition"
+              className="bg-[#B8692E] text-white px-8 py-3 rounded-full font-medium hover:bg-[#a05a25] transition"
             >
               Order via WhatsApp
             </a>
@@ -73,50 +78,62 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50">
+          <ChevronDown className="w-8 h-8 animate-bounce" />
+        </div>
       </section>
 
       {/* Category cards */}
-      <section className="py-20 px-4 bg-brand-cream">
+      <section className="py-20 px-4 bg-[#FFFEF9]">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-heading text-4xl md:text-5xl text-brand-brown text-center mb-12 italic">
+          <h2 className="font-heading text-4xl md:text-5xl text-[#1C1008] text-center mb-12 italic">
             Our Menu
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {categories.map((cat) => (
-              <Link
-                key={cat.name}
-                href={cat.href}
-                className="group bg-white rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition-shadow border border-brand-cream/80"
-              >
-                <div className="text-5xl mb-4">{cat.emoji}</div>
-                <h3 className="font-heading text-2xl font-semibold text-brand-brown mb-2">
-                  {cat.name}
-                </h3>
-                <p className="text-sm text-brand-brown/60">{cat.description}</p>
-              </Link>
+            {categories.map((cat, i) => (
+              <AnimateOnScroll key={cat.name} delay={i * 150} className="h-full">
+                <Link
+                  href={cat.href}
+                  className="group flex flex-col items-center bg-[#FFFEF9] border border-[#F0EBE1] rounded-2xl p-8 text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 h-full"
+                >
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#F0EBE1] mb-4 group-hover:bg-[#1E3D1A] transition-colors duration-300">
+                    <cat.Icon className="w-5 h-5 text-[#1E3D1A] group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <h3 className="font-heading text-2xl font-semibold text-[#1C1008] mb-2">
+                    {cat.name}
+                  </h3>
+                  <p className="text-sm text-[#1C1008]/60">{cat.description}</p>
+                </Link>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured drinks */}
-      <section className="py-20 px-4 bg-white">
+      {/* Crowd Favourites */}
+      <section className="py-20 px-4 bg-[#F0EBE1]">
         <div className="max-w-6xl mx-auto">
-          <h2 className="font-heading text-4xl md:text-5xl text-brand-brown text-center mb-2 italic">
-            Crowd Favourites
-          </h2>
-          <p className="text-center text-brand-brown/50 mb-12 text-sm">
-            Start with these — you can&apos;t go wrong
-          </p>
+          <AnimateOnScroll>
+            <h2 className="font-heading text-4xl md:text-5xl text-[#1C1008] text-center mb-2 italic">
+              Crowd Favourites
+            </h2>
+            <p className="text-center text-[#1C1008]/50 mb-12 text-sm">
+              Start with these — you can&apos;t go wrong
+            </p>
+          </AnimateOnScroll>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {featured.map((item) => (
-              <MenuCard key={item.name} item={item} />
+            {featured.map((item, i) => (
+              <AnimateOnScroll key={item.name} delay={i * 150}>
+                <MenuCard item={item} />
+              </AnimateOnScroll>
             ))}
           </div>
           <div className="text-center mt-10">
             <Link
               href="/menu"
-              className="inline-flex items-center gap-2 text-brand-green font-semibold hover:underline underline-offset-4"
+              className="inline-flex items-center gap-2 text-[#1E3D1A] font-semibold hover:underline underline-offset-4"
             >
               View Full Menu →
             </Link>
@@ -125,41 +142,58 @@ export default function HomePage() {
       </section>
 
       {/* Events teaser */}
-      <section className="py-20 px-4 bg-brand-green text-white">
+      <section
+        className="py-20 px-4 text-white"
+        style={{
+          backgroundColor: "#1E3D1A",
+          backgroundImage: "radial-gradient(circle, #2D5A27 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+      >
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-heading text-4xl md:text-5xl italic mb-4">
-            Book Us For Your Event
-          </h2>
-          <p className="text-brand-cream/80 mb-10 leading-relaxed max-w-xl mx-auto">
-            From kenduri to corporate events — we bring the coffee truck to you.
-            Full menu including exclusive event food, freshly prepared on-site.
-          </p>
-          <Link
-            href="/events"
-            className="inline-flex items-center justify-center rounded-full bg-white text-brand-green font-semibold px-8 py-3.5 hover:bg-brand-cream transition-colors"
-          >
-            Learn More About Events
-          </Link>
+          <AnimateOnScroll>
+            <h2 className="font-heading text-4xl md:text-5xl italic mb-4">
+              Book Us For Your Event
+            </h2>
+            <p className="text-white/80 mb-10 leading-relaxed max-w-xl mx-auto">
+              From kenduri to corporate events — we bring the coffee truck to you.
+              Full menu including exclusive event food, freshly prepared on-site.
+            </p>
+            <Link
+              href="/events"
+              className="inline-flex items-center justify-center rounded-full bg-white text-[#1E3D1A] font-semibold px-8 py-3.5 hover:bg-[#FAF7F2] transition-colors"
+            >
+              Learn More About Events
+            </Link>
+          </AnimateOnScroll>
         </div>
       </section>
 
-      {/* Brand story snippet */}
-      <section className="py-20 px-4 bg-brand-cream">
+      {/* Our Story */}
+      <section className="py-20 px-4 bg-[#FAF7F2]">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="font-heading text-4xl md:text-5xl text-brand-brown italic mb-4">
-            Our Story
-          </h2>
-          <p className="text-brand-brown/70 leading-relaxed mb-6">
-            Born from a love of good coffee and home-cooked warmth, MakCik Barista
-            brings together expertly crafted drinks and heartfelt flavours — right
-            to your doorstep.
-          </p>
-          <Link
-            href="/about"
-            className="text-brand-green font-semibold hover:underline underline-offset-4"
-          >
-            Read Our Story →
-          </Link>
+          <AnimateOnScroll>
+            <div
+              className="font-heading text-8xl text-[#B8692E] leading-none mb-0 select-none"
+              aria-hidden="true"
+            >
+              &ldquo;
+            </div>
+            <h2 className="font-heading text-4xl md:text-5xl text-[#1C1008] italic mb-4">
+              Our Story
+            </h2>
+            <p className="text-[#1C1008]/70 leading-relaxed mb-6">
+              Born from a love of good coffee and home-cooked warmth, MakCik Barista
+              brings together expertly crafted drinks and heartfelt flavours — right
+              to your doorstep.
+            </p>
+            <Link
+              href="/about"
+              className="text-[#1E3D1A] font-semibold hover:underline underline-offset-4"
+            >
+              Read Our Story →
+            </Link>
+          </AnimateOnScroll>
         </div>
       </section>
     </>

@@ -43,7 +43,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans antialiased bg-brand-cream text-brand-brown">
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pt-0">{children}</main>
         <Footer />
         <WhatsAppButton />
       </body>

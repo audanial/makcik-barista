@@ -1,7 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -12,10 +13,28 @@ const navLinks = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50)
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href)
 
   return (
-    <header className="sticky top-0 z-50 bg-[#2D5A27] text-white shadow-sm">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 text-white transition-all duration-300 ${
+        scrolled || open
+          ? "bg-[#1E3D1A] shadow-md"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="font-heading text-2xl italic font-semibold tracking-wide">
           MakCik Barista
         </Link>
@@ -26,7 +45,11 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium hover:text-brand-cream/80 transition-colors"
+              className={`relative text-white text-sm tracking-widest uppercase font-medium pb-1 transition-colors hover:text-white/80 ${
+                isActive(link.href)
+                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-white after:border-white"
+                  : ""
+              }`}
             >
               {link.label}
             </Link>
@@ -60,12 +83,14 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <nav className="md:hidden bg-[#2D5A27] border-t border-white/20 px-4 pb-4">
+        <nav className="md:hidden bg-[#1E3D1A] border-t border-white/10 px-4 pb-4">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="block py-2.5 text-sm font-medium hover:text-brand-cream/80 transition-colors"
+              className={`block py-2.5 text-sm tracking-widest uppercase font-medium transition-colors hover:text-white/80 ${
+                isActive(link.href) ? "text-white" : "text-white/70"
+              }`}
               onClick={() => setOpen(false)}
             >
               {link.label}
