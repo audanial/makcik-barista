@@ -56,7 +56,7 @@ Makcik Barista — F&B marketing website for a family business.
 ## Brand
 - Name: MakCik Barista
 - Tagline: Harom & Hirup
-- WhatsApp: +601123260160
+- WhatsApp: +60123260160
 - Socials: @makcik.barista (IG/TikTok), makcik.barista@gmail.com
 - Location: Kepong, Kuala Lumpur
 - Colors: green #2D5A27, cream #F9F4EC, brown #3B1F0E, brown-light #C07840
