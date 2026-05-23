@@ -93,9 +93,7 @@ export default function EventsPage() {
           </div>
           <div className="text-center mt-10">
             <a
-              href={waLink("Hi MakCik Barista! Saya nak tanya tentang khidmat untuk event sekolah kami.")}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/events#booking-form"
               className="inline-block bg-[#1E3D1A] text-white px-8 py-3 rounded-full text-sm hover:bg-[#2D5A27] transition"
             >
               Book For Your School Event
@@ -188,7 +186,7 @@ export default function EventsPage() {
       </section>
 
       {/* Booking Form */}
-      <section className="bg-[#F0EBE1] py-20 px-4">
+      <section id="booking-form" className="bg-[#F0EBE1] py-20 px-4">
         <div className="max-w-2xl mx-auto">
           <AnimateOnScroll>
             <h2 className="font-heading text-4xl text-[#1C1008] italic text-center mb-2">

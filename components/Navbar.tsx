@@ -34,35 +34,23 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 text-white transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 w-full px-8 md:px-16 text-white transition-all duration-300 ${
         scrolled || open
           ? "bg-[#1E3D1A] shadow-md"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo */}
+      <div className="flex items-center justify-between w-full py-4">
+        {/* Logo + brand name */}
         {pathname === "/" ? (
-          <button onClick={() => setLightboxOpen(true)} aria-label="View logo">
-            <Image
-              src="/images/logo3.png"
-              alt="MakCik Barista"
-              width={52}
-              height={52}
-              className="object-contain"
-              unoptimized
-            />
+          <button onClick={() => setLightboxOpen(true)} aria-label="View logo" className="flex items-center gap-3">
+            <Image src="/images/logo3.png" alt="MakCik Barista" width={52} height={52} className="object-contain" unoptimized />
+            <span className="font-heading italic text-white text-lg">MakCik Barista</span>
           </button>
         ) : (
-          <Link href="/">
-            <Image
-              src="/images/logo3.png"
-              alt="MakCik Barista"
-              width={52}
-              height={52}
-              className="object-contain"
-              unoptimized
-            />
+          <Link href="/" className="flex items-center gap-3">
+            <Image src="/images/logo3.png" alt="MakCik Barista" width={52} height={52} className="object-contain" unoptimized />
+            <span className="font-heading italic text-white text-lg">MakCik Barista</span>
           </Link>
         )}
 
