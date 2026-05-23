@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 
@@ -35,8 +36,17 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="font-heading text-2xl italic font-semibold tracking-wide">
-          MakCik Barista
+        <Link href="/" className="flex items-center gap-2.5">
+          <Image
+            src="/images/logo.png"
+            alt="MakCik Barista"
+            width={44}
+            height={44}
+            className="object-contain rounded-full"
+          />
+          <span className="font-heading text-2xl italic font-semibold tracking-wide">
+            MakCik Barista
+          </span>
         </Link>
 
         {/* Desktop nav */}

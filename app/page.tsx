@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { Coffee, Droplets, UtensilsCrossed, ChevronDown } from "lucide-react"
+import { Coffee, Droplets, UtensilsCrossed, ChevronDown, Leaf, Heart } from "lucide-react"
 import { waLink } from "@/lib/whatsapp"
 import { coffeeItems } from "@/lib/menuData"
 import MenuCard from "@/components/MenuCard"
@@ -58,17 +58,23 @@ export default function HomePage() {
 
         <div className="relative z-10 text-center text-white px-4">
           <h1 className="font-heading text-6xl md:text-8xl italic mb-4">MakCik Barista</h1>
-          <p className="tracking-[0.4em] text-xs md:text-sm uppercase text-white/80 mb-10">
+          <p className="tracking-[0.4em] text-base md:text-lg uppercase text-white/80 mb-3">
             Harom &amp; Hirup
+          </p>
+          <p className="text-lg md:text-xl font-light text-white/90 mb-2">
+            Your School&apos;s Favourite Coffee Stall
+          </p>
+          <p className="text-sm tracking-widest text-white/60 mb-10 uppercase">
+            Kepong · Kuala Lumpur
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <a
-              href={waLink("Hi MakCik Barista! Saya nak order. Boleh tolong? 😊")}
+              href={waLink("Hi MakCik Barista! Saya nak tanya tentang khidmat untuk event sekolah kami.")}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#B8692E] text-white px-8 py-3 rounded-full font-medium hover:bg-[#a05a25] transition"
             >
-              Order via WhatsApp
+              Book For Your School Event
             </a>
             <Link
               href="/events"
@@ -82,6 +88,36 @@ export default function HomePage() {
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50">
           <ChevronDown className="w-8 h-8 animate-bounce" />
+        </div>
+      </section>
+
+      {/* Slow Bar */}
+      <section className="py-20 bg-[#1E3D1A]">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <p className="text-[#B8692E] text-xs tracking-[0.3em] uppercase mb-3">The MakCik Barista Way</p>
+          <h2 className="font-heading text-4xl italic text-white mb-4">Slow Bar. Every Cup.</h2>
+          <p className="text-white/70 text-sm max-w-md mx-auto mb-16">
+            No shortcuts, no machines doing the work for us. Every drink is made by hand, with care, the slow bar way.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {([
+              { Icon: Leaf, step: "01", title: "Fresh Ingredients", desc: "Sourced fresh for every event" },
+              { Icon: Droplets, step: "02", title: "Brewed By Hand", desc: "No machines, pure craft" },
+              { Icon: Heart, step: "03", title: "Crafted With Care", desc: "Every cup gets our full attention" },
+              { Icon: Coffee, step: "04", title: "Served With Love", desc: "Warm, just like Makcik intended" },
+            ] as const).map((item, i) => (
+              <AnimateOnScroll key={item.step} delay={i * 150}>
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 rounded-full border border-[#B8692E]/40 flex items-center justify-center mb-4">
+                    <item.Icon size={24} color="#B8692E" />
+                  </div>
+                  <p className="text-[#B8692E] text-xs tracking-widest mb-1">{item.step}</p>
+                  <p className="text-white font-medium text-sm mb-2">{item.title}</p>
+                  <p className="text-white/50 text-xs leading-relaxed">{item.desc}</p>
+                </div>
+              </AnimateOnScroll>
+            ))}
+          </div>
         </div>
       </section>
 

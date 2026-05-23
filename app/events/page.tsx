@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import { Truck, Store, Coffee, Package } from "lucide-react"
+import { Truck, Store, Coffee, Package, GraduationCap } from "lucide-react"
 import { waLink } from "@/lib/whatsapp"
 import EventBookingForm from "@/components/EventBookingForm"
 import AnimateOnScroll from "@/components/AnimateOnScroll"
@@ -48,7 +48,18 @@ const suitableFor = [
   "Pasar Malam",
 ]
 
+const schoolEvents = [
+  "Hari Sukan / Sports Day",
+  "Hari Kecemerlangan",
+  "Canteen Day",
+  "Staff Appreciation",
+  "School Celebrations",
+  "PTA Events",
+]
+
 const gallery = [
+  { src: "/images/school1.jpeg", alt: "MakCik Barista at a school event" },
+  { src: "/images/school2.jpeg", alt: "MakCik Barista setup at a school celebration" },
   { src: "/images/event1.jpeg", alt: "MakCik Barista food truck at an outdoor event" },
   { src: "/images/event2.jpeg", alt: "Event stall setup with drinks on display" },
   { src: "/images/event3.jpeg", alt: "Guests enjoying coffee at a community event" },
@@ -61,11 +72,40 @@ export default function EventsPage() {
       {/* Hero */}
       <section className="bg-[#1E3D1A] text-white pt-40 pb-24 px-4 text-center">
         <h1 className="font-heading text-5xl md:text-6xl italic mb-4">
-          Bring MakCik Barista To Your Event
+          Bringing Quality Coffee To Your School Event
         </h1>
         <p className="text-white/60 text-xs tracking-widest uppercase">
-          From kenduri to corporate — we set up, you enjoy.
+          From Hari Sukan to school celebrations — we set up, you enjoy.
         </p>
+      </section>
+
+      {/* For Schools */}
+      <section className="py-16 bg-[#FAF7F2]">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="text-[#B8692E] text-xs tracking-[0.3em] uppercase mb-3 text-center">Our Specialty</p>
+          <h2 className="font-heading text-4xl italic text-[#1E3D1A] text-center mb-4">Made For Schools</h2>
+          <p className="text-[#1C1008]/70 text-center max-w-lg mx-auto mb-12">
+            We understand school events. Quick service, clean setup, crowd-friendly drinks — perfect for students, teachers and parents alike.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {schoolEvents.map((event) => (
+              <div key={event} className="bg-white rounded-2xl p-5 border border-[#F0EBE1] text-center">
+                <GraduationCap size={24} className="text-[#1E3D1A] mx-auto mb-3" />
+                <p className="text-sm font-medium text-[#1C1008]">{event}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <a
+              href={waLink("Hi MakCik Barista! Saya nak tanya tentang khidmat untuk event sekolah kami.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-[#1E3D1A] text-white px-8 py-3 rounded-full text-sm hover:bg-[#2D5A27] transition"
+            >
+              Book For Your School Event
+            </a>
+          </div>
+        </div>
       </section>
 
       {/* What We Offer */}
@@ -98,10 +138,13 @@ export default function EventsPage() {
           <AnimateOnScroll>
             <h2 className="font-heading text-4xl text-[#1C1008] italic mb-10">Suitable For</h2>
             <div className="flex flex-wrap justify-center gap-3">
+              <span className="bg-[#1E3D1A] text-white rounded-full px-4 py-2 text-sm font-medium">
+                School Events
+              </span>
               {suitableFor.map((tag) => (
                 <span
                   key={tag}
-                  className="bg-[#1E3D1A] text-white rounded-full px-4 py-2 text-sm font-medium"
+                  className="border border-[#1E3D1A] text-[#1E3D1A] rounded-full px-4 py-2 text-sm font-medium"
                 >
                   {tag}
                 </span>

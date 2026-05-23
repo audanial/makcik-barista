@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { MessageCircle, Mail, MapPin } from "lucide-react"
 import { waLink } from "@/lib/whatsapp"
 
@@ -8,6 +9,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div>
+            <Image
+              src="/images/logo.png"
+              alt="MakCik Barista"
+              width={80}
+              height={80}
+              className="object-contain rounded-full mb-3"
+            />
             <h2 className="font-heading text-2xl italic mb-1">MakCik Barista</h2>
             <p className="text-[#FAF7F2]/50 text-sm">Harom &amp; Hirup</p>
           </div>

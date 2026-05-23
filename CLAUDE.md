@@ -101,3 +101,10 @@ Makcik Barista — F&B marketing website for a family business.
 - Use bg-[#F9F4EC], text-[#2D5A27], text-[#3B1F0E] for brand colors
 - Static metadata export on both pages
 - Mobile-first layout
+
+## Sprint 2.6 — Schools focus + Slow bar + Logo
+- Logo: /public/images/logo.png — use in navbar and footer
+- Primary audience: school event organizers
+- Slow bar section: between hero and Our Menu on home page
+- School events lead on events page
+- Food truck references stay — approved brand history
