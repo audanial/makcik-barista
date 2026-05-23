@@ -10,14 +10,12 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Image
-              src="/images/logo.png"
+              src="/images/logo3.png"
               alt="MakCik Barista"
               width={80}
               height={80}
-              className="object-contain rounded-full mb-3"
+              className="object-contain"
             />
-            <h2 className="font-heading text-2xl italic mb-1">MakCik Barista</h2>
-            <p className="text-[#FAF7F2]/50 text-sm">Harom &amp; Hirup</p>
           </div>
 
           {/* Contact */}

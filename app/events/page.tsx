@@ -60,10 +60,6 @@ const schoolEvents = [
 const gallery = [
   { src: "/images/school1.jpeg", alt: "MakCik Barista at a school event" },
   { src: "/images/school2.jpeg", alt: "MakCik Barista setup at a school celebration" },
-  { src: "/images/event1.jpeg", alt: "MakCik Barista food truck at an outdoor event" },
-  { src: "/images/event2.jpeg", alt: "Event stall setup with drinks on display" },
-  { src: "/images/event3.jpeg", alt: "Guests enjoying coffee at a community event" },
-  { src: "/images/event4.jpeg", alt: "Catering setup at a corporate gathering" },
 ]
 
 export default function EventsPage() {

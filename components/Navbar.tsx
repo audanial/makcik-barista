@@ -4,6 +4,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
+import CartButton from "@/components/CartButton"
+import CartDrawer from "@/components/CartDrawer"
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -15,6 +17,8 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [cartOpen, setCartOpen] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -36,59 +40,65 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5">
-          <Image
-            src="/images/logo.png"
-            alt="MakCik Barista"
-            width={44}
-            height={44}
-            className="object-contain rounded-full"
-          />
-          <span className="font-heading text-2xl italic font-semibold tracking-wide">
-            MakCik Barista
-          </span>
-        </Link>
+        {/* Logo */}
+        {pathname === "/" ? (
+          <button onClick={() => setLightboxOpen(true)} aria-label="View logo">
+            <Image
+              src="/images/logo3.png"
+              alt="MakCik Barista"
+              width={52}
+              height={52}
+              className="object-contain"
+              unoptimized
+            />
+          </button>
+        ) : (
+          <Link href="/">
+            <Image
+              src="/images/logo3.png"
+              alt="MakCik Barista"
+              width={52}
+              height={52}
+              className="object-contain"
+              unoptimized
+            />
+          </Link>
+        )}
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`relative text-white text-sm tracking-widest uppercase font-medium pb-1 transition-colors hover:text-white/80 ${
-                isActive(link.href)
-                  ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-white after:border-white"
-                  : ""
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        {/* Right side */}
+        <div className="flex items-center gap-2">
+          {/* Desktop nav */}
+          <nav className="hidden md:flex items-center gap-8 mr-2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`relative text-white text-sm tracking-widest uppercase font-medium pb-1 transition-colors hover:text-white/80 ${
+                  isActive(link.href)
+                    ? "after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-white after:border-white"
+                    : ""
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
-        {/* Hamburger button */}
-        <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle navigation menu"
-          aria-expanded={open}
-        >
-          <span
-            className={`block w-6 h-0.5 bg-white transition-transform duration-200 ${
-              open ? "rotate-45 translate-y-2" : ""
-            }`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-white transition-opacity duration-200 ${
-              open ? "opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block w-6 h-0.5 bg-white transition-transform duration-200 ${
-              open ? "-rotate-45 -translate-y-2" : ""
-            }`}
-          />
-        </button>
+          {/* Cart button — always visible */}
+          <CartButton onOpen={() => setCartOpen(true)} />
+
+          {/* Hamburger — mobile only */}
+          <button
+            className="md:hidden flex flex-col gap-1.5 p-2"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={open}
+          >
+            <span className={`block w-6 h-0.5 bg-white transition-transform duration-200 ${open ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block w-6 h-0.5 bg-white transition-opacity duration-200 ${open ? "opacity-0" : ""}`} />
+            <span className={`block w-6 h-0.5 bg-white transition-transform duration-200 ${open ? "-rotate-45 -translate-y-2" : ""}`} />
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -108,6 +118,28 @@ export default function Navbar() {
           ))}
         </nav>
       )}
+
+      {/* Logo lightbox */}
+      {lightboxOpen && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center cursor-pointer"
+          onClick={() => setLightboxOpen(false)}
+        >
+          <div className="relative w-72 h-72 md:w-96 md:h-96">
+            <Image
+              src="/images/logo3.png"
+              alt="MakCik Barista logo"
+              fill
+              className="object-contain"
+              unoptimized
+            />
+          </div>
+          <p className="absolute bottom-8 text-white/60 text-sm tracking-widest">Click anywhere to close</p>
+        </div>
+      )}
+
+      {/* Cart drawer */}
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
     </header>
   )
 }

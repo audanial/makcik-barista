@@ -97,17 +97,17 @@ export default function MenuPage() {
         {/* Bottom CTA */}
         <AnimateOnScroll>
           <section className="bg-[#FFFEF9] rounded-2xl shadow-sm border border-[#F0EBE1] px-8 py-10 text-center">
-            <p className="text-[#1C1008] font-medium mb-5 text-lg">
-              Not sure what to order? Ask us on WhatsApp!
+            <p className="text-[#1C1008] font-medium text-lg">
+              Not sure what to order?{" "}
+              <a
+                href={waLink("Hi MakCik Barista! Boleh tolong suggest menu yang best? 😊")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#1E3D1A] font-semibold underline underline-offset-4 hover:text-[#2D5A27] transition-colors"
+              >
+                Chat with us
+              </a>
             </p>
-            <a
-              href={waLink("Hi MakCik Barista! Boleh tolong suggest menu yang best? 😊")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#1E3D1A] text-white font-semibold px-8 py-3.5 hover:bg-[#2D5A27] transition-colors"
-            >
-              Chat With Us
-            </a>
           </section>
         </AnimateOnScroll>
       </div>
