@@ -8,6 +8,15 @@ export type CartItem = {
   quantity: number
 }
 
+export type DeliveryInfo = {
+  name: string
+  phone: string
+  address: string
+  area: string
+  deliveryFee: number
+  notes: string
+}
+
 type CartContextType = {
   items: CartItem[]
   addItem: (item: Omit<CartItem, 'quantity'>) => void
@@ -16,12 +25,30 @@ type CartContextType = {
   clearCart: () => void
   totalItems: number
   totalPrice: number
+  deliveryInfo: DeliveryInfo
+  setDeliveryInfo: (info: DeliveryInfo) => void
+  orderType: 'delivery' | 'pickup'
+  setOrderType: (type: 'delivery' | 'pickup') => void
+  isCartOpen: boolean
+  setIsCartOpen: (open: boolean) => void
+}
+
+const defaultDeliveryInfo: DeliveryInfo = {
+  name: '',
+  phone: '',
+  address: '',
+  area: '',
+  deliveryFee: 0,
+  notes: '',
 }
 
 const CartContext = createContext<CartContextType | null>(null)
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
+  const [deliveryInfo, setDeliveryInfo] = useState<DeliveryInfo>(defaultDeliveryInfo)
+  const [orderType, setOrderType] = useState<'delivery' | 'pickup'>('delivery')
+  const [isCartOpen, setIsCartOpen] = useState(false)
 
   const addItem = (item: Omit<CartItem, 'quantity'>) => {
     setItems(prev => {
@@ -45,7 +72,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const totalPrice = items.reduce((sum, i) => sum + i.price * i.quantity, 0)
 
   return (
-    <CartContext.Provider value={{ items, addItem, removeItem, updateQty, clearCart, totalItems, totalPrice }}>
+    <CartContext.Provider value={{
+      items, addItem, removeItem, updateQty, clearCart,
+      totalItems, totalPrice,
+      deliveryInfo, setDeliveryInfo,
+      orderType, setOrderType,
+      isCartOpen, setIsCartOpen,
+    }}>
       {children}
     </CartContext.Provider>
   )

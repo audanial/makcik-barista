@@ -27,11 +27,11 @@ export const nonCoffeeItems: MenuItem[] = [
 
 export const foodItems: MenuItem[] = [
   { name: "Nasi Lemak", category: "food", price: 4.00, eventOnly: true },
-  { name: "Ayam Korea", category: "food", eventOnly: true },
-  { name: "Ramen", category: "food", eventOnly: true },
-  { name: "Hotdog", category: "food", eventOnly: true },
-  { name: "Croffle", category: "food", eventOnly: true },
-  { name: "Pasta", category: "food", eventOnly: true },
+  { name: "Ayam Korea", category: "food", price: 8.00, eventOnly: true },
+  { name: "Ramen", category: "food", price: 9.00, eventOnly: true },
+  { name: "Hotdog", category: "food", price: 5.00, eventOnly: true },
+  { name: "Croffle", category: "food", price: 7.00, eventOnly: true },
+  { name: "Pasta", category: "food", price: 8.00, eventOnly: true },
 ]
 
 export const addOns: AddOn[] = [

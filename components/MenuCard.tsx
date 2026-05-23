@@ -1,16 +1,54 @@
 'use client'
 import { useState } from 'react'
-import { Plus, X } from 'lucide-react'
+import { Plus, X, Trash2 } from 'lucide-react'
 import { useCart } from '@/lib/cartContext'
 import type { MenuItem } from '@/lib/menuData'
 
+function CartPill({
+  qty,
+  onRemove,
+  onAdd,
+  label,
+}: {
+  qty: number
+  onRemove: () => void
+  onAdd: () => void
+  label?: string
+}) {
+  return (
+    <div className="bg-white border border-[#1E3D1A] rounded-full px-2 py-1 flex items-center gap-1.5">
+      <button onClick={onRemove} className="hover:opacity-70 transition" aria-label="Remove">
+        <Trash2 size={13} className="text-[#1C1008]/60" />
+      </button>
+      {label && <span className="text-[10px] text-[#1C1008]/50 font-medium">{label}</span>}
+      <span className="text-sm font-medium text-[#1C1008] min-w-[16px] text-center">{qty}</span>
+      <button
+        onClick={onAdd}
+        className="bg-[#1E3D1A] text-white rounded-full w-5 h-5 flex items-center justify-center hover:bg-[#2D5A27] transition"
+        aria-label="Add one more"
+      >
+        <Plus size={10} />
+      </button>
+    </div>
+  )
+}
+
 export default function MenuCard({ item }: { item: MenuItem }) {
-  const { name, category, hotPrice, icedPrice, price, eventOnly } = item
-  const { addItem } = useCart()
+  const { name, category, hotPrice, icedPrice, price } = item
+  const { items, addItem, removeItem, updateQty } = useCart()
   const [pickerOpen, setPickerOpen] = useState(false)
 
   const hasBothVariants = hotPrice != null && icedPrice != null
   const hasPrice = hotPrice != null || icedPrice != null || price != null
+
+  const hotItem = items.find(i => i.name === name && i.variant === 'hot')
+  const icedItem = items.find(i => i.name === name && i.variant === 'iced')
+  const singleItem = items.find(i => i.name === name && i.variant === 'single')
+
+  // Show + button if there's still a variant not yet in cart
+  const showAddButton = hasBothVariants
+    ? !hotItem || !icedItem
+    : !hotItem && !icedItem && !singleItem
 
   const displayPrice =
     category === 'food' && price != null
@@ -24,17 +62,10 @@ export default function MenuCard({ item }: { item: MenuItem }) {
       : null
 
   const handleAdd = () => {
-    if (hasBothVariants) {
-      setPickerOpen(true)
-      return
-    }
-    if (icedPrice != null) {
-      addItem({ name, price: icedPrice, variant: 'iced' })
-    } else if (hotPrice != null) {
-      addItem({ name, price: hotPrice, variant: 'hot' })
-    } else if (price != null) {
-      addItem({ name, price, variant: 'single' })
-    }
+    if (hasBothVariants) { setPickerOpen(true); return }
+    if (icedPrice != null) addItem({ name, price: icedPrice, variant: 'iced' })
+    else if (hotPrice != null) addItem({ name, price: hotPrice, variant: 'hot' })
+    else if (price != null) addItem({ name, price, variant: 'single' })
   }
 
   const handleVariantPick = (variant: 'hot' | 'iced') => {
@@ -62,16 +93,10 @@ export default function MenuCard({ item }: { item: MenuItem }) {
         </div>
       </div>
 
-      {eventOnly && (
-        <p className="text-xs text-amber-700 bg-amber-50 rounded-full px-3 py-1 w-fit">
-          Available at events only
-        </p>
-      )}
-
       {hasPrice && (
-        <div className="mt-auto flex justify-end">
+        <div className="mt-auto flex flex-wrap gap-2 justify-end items-center">
           {pickerOpen ? (
-            <div className="flex items-center gap-2">
+            <>
               <button
                 onClick={() => handleVariantPick('hot')}
                 className="text-xs px-3 py-1.5 rounded-full bg-[#1C1008] text-white hover:opacity-80 transition font-medium"
@@ -91,15 +116,42 @@ export default function MenuCard({ item }: { item: MenuItem }) {
               >
                 <X size={14} className="text-[#1C1008]/50" />
               </button>
-            </div>
+            </>
           ) : (
-            <button
-              onClick={handleAdd}
-              className="bg-[#1E3D1A] text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-[#2D5A27] transition"
-              aria-label={`Add ${name} to cart`}
-            >
-              <Plus size={16} />
-            </button>
+            <>
+              {hotItem && (
+                <CartPill
+                  label={hasBothVariants ? 'Hot' : undefined}
+                  qty={hotItem.quantity}
+                  onRemove={() => removeItem(name, 'hot')}
+                  onAdd={() => updateQty(name, 'hot', hotItem.quantity + 1)}
+                />
+              )}
+              {icedItem && (
+                <CartPill
+                  label={hasBothVariants ? 'Iced' : undefined}
+                  qty={icedItem.quantity}
+                  onRemove={() => removeItem(name, 'iced')}
+                  onAdd={() => updateQty(name, 'iced', icedItem.quantity + 1)}
+                />
+              )}
+              {singleItem && (
+                <CartPill
+                  qty={singleItem.quantity}
+                  onRemove={() => removeItem(name, 'single')}
+                  onAdd={() => updateQty(name, 'single', singleItem.quantity + 1)}
+                />
+              )}
+              {showAddButton && (
+                <button
+                  onClick={handleAdd}
+                  className="bg-[#1E3D1A] text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-[#2D5A27] transition"
+                  aria-label={`Add ${name} to cart`}
+                >
+                  <Plus size={16} />
+                </button>
+              )}
+            </>
           )}
         </div>
       )}

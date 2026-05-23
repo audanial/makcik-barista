@@ -11,6 +11,7 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "Menu", href: "/menu" },
   { label: "Events", href: "/events" },
+  { label: "Delivery", href: "/delivery" },
   { label: "About", href: "/about" },
 ]
 

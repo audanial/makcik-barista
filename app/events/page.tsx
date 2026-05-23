@@ -104,6 +104,17 @@ export default function EventsPage() {
         </div>
       </section>
 
+      {/* Event pricing disclaimer */}
+      <section className="bg-[#FAF7F2] px-4 pb-10">
+        <div className="bg-[#B8692E]/10 border border-[#B8692E]/20 rounded-2xl px-6 py-5 max-w-2xl mx-auto text-center">
+          <p className="text-sm font-medium text-[#B8692E] mb-1">Event Pricing Notice</p>
+          <p className="text-sm text-[#1C1008]/70">
+            Event pricing is customised based on your event size, location and duration.
+            Fill in our booking form and we&apos;ll get back to you with a tailored quote.
+          </p>
+        </div>
+      </section>
+
       {/* What We Offer */}
       <section className="bg-[#FAF7F2] py-20 px-4">
         <div className="max-w-6xl mx-auto">

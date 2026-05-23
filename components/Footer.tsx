@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#1C1008] text-[#FAF7F2]">
       <div className="max-w-6xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
             <Image
@@ -16,6 +16,18 @@ export default function Footer() {
               height={80}
               className="object-contain"
             />
+          </div>
+
+          {/* Delivery areas */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-widest mb-4 text-[#FAF7F2]/40">
+              Delivery Areas
+            </h3>
+            <p className="text-sm text-[#FAF7F2]/70">Kepong · Sri Damansara · Segambut</p>
+            <p className="text-sm text-[#FAF7F2]/70">Mont Kiara · Sentul · Jalan Ipoh</p>
+            <a href="/delivery" className="text-xs text-[#B8692E] mt-2 inline-block hover:underline">
+              View all areas →
+            </a>
           </div>
 
           {/* Contact */}

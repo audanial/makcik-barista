@@ -1,9 +1,17 @@
+'use client'
 import { MessageCircle } from "lucide-react"
 import { waLink } from "@/lib/whatsapp"
+import { useCart } from "@/lib/cartContext"
 
 export default function WhatsAppButton() {
+  const { isCartOpen } = useCart()
+
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div
+      className={`fixed bottom-6 right-6 z-50 transition-all duration-300 ${
+        isCartOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      }`}
+    >
       <div className="relative w-14 h-14 group">
         {/* Pulse ring */}
         <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25" />
