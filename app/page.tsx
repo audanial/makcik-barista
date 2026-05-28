@@ -54,31 +54,21 @@ export default function HomePage() {
           priority
           unoptimized
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1E3D1A]/60 via-[#1E3D1A]/50 to-[#1E3D1A]/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1E3D1A]/65 via-[#1E3D1A]/60 to-[#1E3D1A]/85" />
 
         <div className="relative z-10 text-center text-white px-4">
-          <div className="flex flex-col items-center leading-none mb-6">
-            <span className="font-heading italic text-white text-6xl md:text-8xl">Harom</span>
-            <span className="font-heading italic text-white/60 text-4xl md:text-5xl">&amp;</span>
-            <span className="font-heading italic text-white text-6xl md:text-8xl">Hirup</span>
-          </div>
-          <p className="text-lg md:text-xl font-light text-white/90 mb-10">
+          <h1 className="font-heading not-italic tracking-[0.4em] text-5xl md:text-7xl text-white mb-5 uppercase">
+            Harom &amp; Hirup
+          </h1>
+          <p className="text-sm md:text-base font-light text-white/75 tracking-[0.25em] uppercase mb-10">
             Good Coffee. Great Events.
           </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Link
-              href="/events#booking-form"
-              className="bg-[#B8692E] text-white px-8 py-3 rounded-full font-medium hover:bg-[#a05a25] transition"
-            >
-              Book For Your School Event
-            </Link>
-            <Link
-              href="/events"
-              className="border border-white text-white px-8 py-3 rounded-full font-medium hover:bg-white/10 transition"
-            >
-              Book an Event
-            </Link>
-          </div>
+          <Link
+            href="/events"
+            className="inline-block bg-[#B8692E] text-white px-12 py-4 rounded-full text-sm md:text-base font-medium hover:bg-[#a05a25] transition-colors"
+          >
+            Book an Event
+          </Link>
         </div>
 
         {/* Scroll indicator */}

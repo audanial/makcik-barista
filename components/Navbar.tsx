@@ -45,12 +45,12 @@ export default function Navbar() {
         {pathname === "/" ? (
           <button onClick={() => setLightboxOpen(true)} aria-label="View logo" className="flex items-center gap-3">
             <Image src="/images/logo3.png" alt="MakCik Barista" width={52} height={52} className="object-contain" unoptimized />
-            <span className="font-heading italic text-white text-lg">MakCik Barista</span>
+            <span className="font-heading italic text-white text-xl tracking-[0.08em]">MakCik Barista</span>
           </button>
         ) : (
           <Link href="/" className="flex items-center gap-3">
             <Image src="/images/logo3.png" alt="MakCik Barista" width={52} height={52} className="object-contain" unoptimized />
-            <span className="font-heading italic text-white text-lg">MakCik Barista</span>
+            <span className="font-heading italic text-white text-xl tracking-[0.08em]">MakCik Barista</span>
           </Link>
         )}
 
