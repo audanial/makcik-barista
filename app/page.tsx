@@ -47,7 +47,7 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center">
         <Image
-          src="/images/hero.jpeg"
+          src="/images/hero2.jpeg"
           alt="MakCik Barista food truck"
           fill
           className="object-cover object-center"

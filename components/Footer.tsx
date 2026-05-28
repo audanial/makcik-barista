@@ -10,7 +10,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Image
-              src="/images/logo3.png"
+              src="/images/logo4.jpeg"
               alt="MakCik Barista"
               width={80}
               height={80}

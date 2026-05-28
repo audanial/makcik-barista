@@ -116,7 +116,7 @@ export default function Navbar() {
         >
           <div className="relative w-72 h-72 md:w-96 md:h-96">
             <Image
-              src="/images/logo3.png"
+              src="/images/logo4.jpeg"
               alt="MakCik Barista logo"
               fill
               className="object-contain"
