@@ -8,14 +8,16 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
-          <div>
+          <div className="flex flex-col items-center">
             <Image
-              src="/images/logo4.jpeg"
+              src="/images/logo3.png"
               alt="MakCik Barista"
               width={80}
               height={80}
               className="object-contain"
+              unoptimized
             />
+            <p className="font-heading italic text-[#FAF7F2] text-lg tracking-[0.08em] mt-2">MakCik Barista</p>
           </div>
 
           {/* Delivery areas */}
