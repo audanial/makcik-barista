@@ -18,7 +18,7 @@ const offerings = [
   {
     Icon: Truck,
     title: "Food Truck Setup",
-    desc: "Our iconic food truck rolls in fully equipped. We handle the setup — you enjoy the event.",
+    desc: "Our iconic food truck arrives fully equipped and ready to serve your guests.",
   },
   {
     Icon: Store,
@@ -80,7 +80,7 @@ export default function EventsPage() {
           <p className="text-[#B8692E] text-xs tracking-[0.3em] uppercase mb-3 text-center">Our Specialty</p>
           <h2 className="font-heading text-4xl italic text-[#1E3D1A] text-center mb-4">Made For Schools</h2>
           <p className="text-[#1C1008]/70 text-center max-w-lg mx-auto mb-12">
-            We understand school events. Quick service, clean setup, crowd-friendly drinks — perfect for students, teachers and parents alike.
+            Quick service, clean setup, and crowd-friendly drinks that work perfectly for students, teachers, and parents.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {schoolEvents.map((event) => (
@@ -90,9 +90,6 @@ export default function EventsPage() {
               </div>
             ))}
           </div>
-          <p className="text-center text-[#1C1008]/50 text-sm mt-10 max-w-md mx-auto leading-relaxed">
-            From school programmes to private celebrations, we bring handcrafted coffee to your event.
-          </p>
         </div>
       </section>
 
@@ -134,8 +131,7 @@ export default function EventsPage() {
       {/* Past Events */}
       <section className="bg-[#1C1008] py-20">
         <div className="text-center px-4 mb-10">
-          <p className="text-[#B8692E] text-xs tracking-[0.3em] uppercase mb-3">Real Moments</p>
-          <h2 className="font-heading text-4xl text-white italic">Past Events</h2>
+          <h2 className="font-heading text-4xl text-[#B8692E] italic">Past Events</h2>
         </div>
         <EventsCarousel />
       </section>
