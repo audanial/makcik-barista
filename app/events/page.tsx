@@ -1,8 +1,7 @@
 import type { Metadata } from "next"
-import Image from "next/image"
 import { Truck, Store, Coffee, Package, GraduationCap } from "lucide-react"
-import { waLink } from "@/lib/whatsapp"
 import EventBookingForm from "@/components/EventBookingForm"
+import EventsCarousel from "@/components/EventsCarousel"
 import AnimateOnScroll from "@/components/AnimateOnScroll"
 
 export const metadata: Metadata = {
@@ -38,16 +37,6 @@ const offerings = [
   },
 ]
 
-const suitableFor = [
-  "Wedding",
-  "Corporate",
-  "Birthday",
-  "School & Campus",
-  "Community Event",
-  "Private Gathering",
-  "Pasar Malam",
-]
-
 const schoolEvents = [
   "Hari Sukan / Sports Day",
   "Hari Kecemerlangan",
@@ -57,22 +46,32 @@ const schoolEvents = [
   "PTA Events",
 ]
 
-const gallery = [
-  { src: "/images/school1.jpeg", alt: "MakCik Barista at a school event" },
-  { src: "/images/school2.jpeg", alt: "MakCik Barista setup at a school celebration" },
-]
-
 export default function EventsPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
       <section className="bg-[#1E3D1A] text-white pt-40 pb-24 px-4 text-center">
         <h1 className="font-heading text-5xl md:text-6xl italic mb-4">
-          Bringing Quality Coffee To Your School Event
+          Handcrafted Food &amp; Drinks For Every Event
         </h1>
-        <p className="text-white/60 text-xs tracking-widest uppercase">
-          From Hari Sukan to school celebrations — we set up, you enjoy.
+        <p className="text-white/60 text-sm max-w-md mx-auto">
+          From Hari Sukan to private events, we bring the setup while you enjoy the moment.
         </p>
+      </section>
+
+      {/* Booking Form */}
+      <section id="booking-form" className="bg-[#F0EBE1] py-20 px-4">
+        <div className="max-w-2xl mx-auto">
+          <AnimateOnScroll>
+            <h2 className="font-heading text-4xl text-[#1C1008] italic text-center mb-4">
+              Book Us For Your Event
+            </h2>
+            <p className="text-center text-[#1C1008]/40 text-xs tracking-wide mb-10">
+              Response usually within 24 hours.
+            </p>
+          </AnimateOnScroll>
+          <EventBookingForm />
+        </div>
       </section>
 
       {/* For Schools */}
@@ -91,14 +90,9 @@ export default function EventsPage() {
               </div>
             ))}
           </div>
-          <div className="text-center mt-10">
-            <a
-              href="/events#booking-form"
-              className="inline-block bg-[#1E3D1A] text-white px-8 py-3 rounded-full text-sm hover:bg-[#2D5A27] transition"
-            >
-              Book For Your School Event
-            </a>
-          </div>
+          <p className="text-center text-[#1C1008]/50 text-sm mt-10 max-w-md mx-auto leading-relaxed">
+            From school programmes to private celebrations, we bring handcrafted coffee to your event.
+          </p>
         </div>
       </section>
 
@@ -137,82 +131,15 @@ export default function EventsPage() {
         </div>
       </section>
 
-      {/* Suitable For */}
-      <section className="bg-[#F0EBE1] py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <AnimateOnScroll>
-            <h2 className="font-heading text-4xl text-[#1C1008] italic mb-10">Suitable For</h2>
-            <div className="flex flex-wrap justify-center gap-3">
-              <span className="bg-[#1E3D1A] text-white rounded-full px-4 py-2 text-sm font-medium">
-                School Events
-              </span>
-              {suitableFor.map((tag) => (
-                <span
-                  key={tag}
-                  className="border border-[#1E3D1A] text-[#1E3D1A] rounded-full px-4 py-2 text-sm font-medium"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </AnimateOnScroll>
+      {/* Past Events */}
+      <section className="bg-[#1C1008] py-20">
+        <div className="text-center px-4 mb-10">
+          <p className="text-[#B8692E] text-xs tracking-[0.3em] uppercase mb-3">Real Moments</p>
+          <h2 className="font-heading text-4xl text-white italic">Past Events</h2>
         </div>
+        <EventsCarousel />
       </section>
 
-      {/* Past Events Gallery */}
-      <section className="bg-[#FAF7F2] py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <AnimateOnScroll>
-            <h2 className="font-heading text-4xl text-[#1C1008] italic text-center mb-12">
-              Past Events
-            </h2>
-          </AnimateOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {gallery.map((img, i) => (
-              <AnimateOnScroll key={img.src} delay={i * 100}>
-                <div className="relative aspect-video rounded-2xl overflow-hidden bg-[#1C1008]/10">
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-500"
-                    unoptimized
-                  />
-                </div>
-              </AnimateOnScroll>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Booking Form */}
-      <section id="booking-form" className="bg-[#F0EBE1] py-20 px-4">
-        <div className="max-w-2xl mx-auto">
-          <AnimateOnScroll>
-            <h2 className="font-heading text-4xl text-[#1C1008] italic text-center mb-2">
-              Book Us For Your Event
-            </h2>
-            <p className="text-center text-[#1C1008]/60 text-sm mb-10">
-              Fill in your details and we&apos;ll open WhatsApp with everything ready.
-            </p>
-          </AnimateOnScroll>
-
-          <EventBookingForm />
-
-          {/* Fallback */}
-          <div className="mt-8 text-center border-t border-[#1C1008]/10 pt-8">
-            <p className="text-sm text-[#1C1008]/60 mb-4">Prefer to message directly?</p>
-            <a
-              href={waLink("Hi MakCik Barista! Saya nak tanya tentang event catering.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#1E3D1A] text-white text-sm font-semibold px-6 py-3 hover:bg-[#2D5A27] transition-colors"
-            >
-              WhatsApp Us Directly
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

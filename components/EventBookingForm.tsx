@@ -16,6 +16,7 @@ const eventTypes = [
 type FormState = {
   name: string
   contact: string
+  email: string
   date: string
   location: string
   pax: string
@@ -29,6 +30,7 @@ export default function EventBookingForm() {
   const [form, setForm] = useState<FormState>({
     name: "",
     contact: "",
+    email: "",
     date: "",
     location: "",
     pax: "",
@@ -42,6 +44,8 @@ export default function EventBookingForm() {
     const errs: FormErrors = {}
     if (!form.name.trim()) errs.name = "Full name is required."
     if (!form.contact.trim()) errs.contact = "Contact number is required."
+    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+      errs.email = "Valid email address is required."
     if (!form.date) errs.date = "Event date is required."
     if (!form.location.trim()) errs.location = "Location is required."
     if (!form.pax || Number(form.pax) < 1) errs.pax = "Please enter estimated pax."
@@ -61,6 +65,7 @@ export default function EventBookingForm() {
 
 Nama: ${form.name}
 Kontak: ${form.contact}
+Email: ${form.email}
 Tarikh: ${form.date}
 Lokasi: ${form.location}
 Anggaran Pax: ${form.pax}
@@ -115,10 +120,11 @@ Notes: ${form.notes || "Tiada"}`
 
       {/* Contact Number */}
       <div>
-        <label className="block text-sm font-medium text-[#3B1F0E] mb-1">
+        <label htmlFor="contact" className="block text-sm font-medium text-[#3B1F0E] mb-1">
           Contact Number <span className="text-red-500">*</span>
         </label>
         <input
+          id="contact"
           type="tel"
           name="contact"
           value={form.contact}
@@ -127,6 +133,23 @@ Notes: ${form.notes || "Tiada"}`
           className={inputClass("contact")}
         />
         {errors.contact && <p className="text-red-500 text-xs mt-1">{errors.contact}</p>}
+      </div>
+
+      {/* Email */}
+      <div>
+        <label htmlFor="email" className="block text-sm font-medium text-[#3B1F0E] mb-1">
+          Email Address <span className="text-red-500">*</span>
+        </label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder="e.g. siti@example.com"
+          className={inputClass("email")}
+        />
+        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
       </div>
 
       {/* Event Date */}
@@ -219,7 +242,7 @@ Notes: ${form.notes || "Tiada"}`
 
       <button
         type="submit"
-        className="w-full rounded-full bg-[#2D5A27] text-white font-semibold py-3.5 hover:bg-[#2D5A27]/90 transition-colors"
+        className="w-full rounded-full bg-[#B8692E] text-white font-semibold py-3.5 hover:bg-[#a05a25] transition-colors"
       >
         Send Booking Request via WhatsApp
       </button>
