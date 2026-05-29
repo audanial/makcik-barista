@@ -45,7 +45,16 @@ export default function CartDrawer({ open, onClose }: Props) {
   }
 
   const handleSendOrder = () => {
-    const message = `Hi MakCik Barista! Saya nak order untuk delivery. 🛵\n\n📋 ORDER:\n${items.map(i => `• ${i.name} (${i.variant}) x${i.quantity} — RM${(i.price * i.quantity).toFixed(2)}`).join('\n')}\n\n🧾 Subtotal: RM${totalPrice.toFixed(2)}\n🚗 Delivery fee: RM${deliveryInfo.deliveryFee.toFixed(2)}\n💰 Total: RM${(totalPrice + deliveryInfo.deliveryFee).toFixed(2)}\n\n📍 DELIVERY INFO:\nNama: ${deliveryInfo.name}\nNo. Tel: ${deliveryInfo.phone}\nKawasan: ${deliveryInfo.area}\nAlamat: ${deliveryInfo.address}\nNotes: ${deliveryInfo.notes || 'Tiada'}\n\nBoleh confirm availability dan masa delivery? 🙏`
+    const orderLines = items.map(i => {
+      const addOnsTotal = i.addOns.reduce((s, a) => s + a.price, 0)
+      const lineTotal = (i.price + addOnsTotal) * i.quantity
+      const addOnsStr = i.addOns.length > 0
+        ? '\n' + i.addOns.map(a => `    ↳ + ${a.name} (+RM${a.price.toFixed(2)})`).join('\n')
+        : ''
+      return `• ${i.name} (${i.variant}) x${i.quantity} — RM${lineTotal.toFixed(2)}${addOnsStr}`
+    }).join('\n')
+
+    const message = `Hi MakCik Barista! Saya nak order untuk delivery. 🛵\n\n📋 ORDER:\n${orderLines}\n\n🧾 Subtotal: RM${totalPrice.toFixed(2)}\n🚗 Delivery fee: RM${deliveryInfo.deliveryFee.toFixed(2)}\n💰 Total: RM${(totalPrice + deliveryInfo.deliveryFee).toFixed(2)}\n\n📍 DELIVERY INFO:\nNama: ${deliveryInfo.name}\nNo. Tel: ${deliveryInfo.phone}\nKawasan: ${deliveryInfo.area}\nAlamat: ${deliveryInfo.address}\nNotes: ${deliveryInfo.notes || 'Tiada'}\n\nBoleh confirm availability dan masa delivery? 🙏`
     window.open(waLink(message), '_blank')
   }
 
@@ -96,34 +105,48 @@ export default function CartDrawer({ open, onClose }: Props) {
             </div>
           ) : (
             <ul className="space-y-3">
-              {items.map((item) => (
-                <li
-                  key={`${item.name}-${item.variant}`}
-                  className="bg-white rounded-xl p-4 border border-[#F0EBE1] flex flex-col gap-2"
-                >
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <p className="font-medium text-[#1C1008] text-sm">{item.name}</p>
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-[#1E3D1A] text-white capitalize">
-                        {item.variant}
-                      </span>
+              {items.map((item) => {
+                const addOnsTotal = item.addOns.reduce((s, a) => s + a.price, 0)
+                const lineTotal = (item.price + addOnsTotal) * item.quantity
+                return (
+                  <li
+                    key={item.cartId}
+                    className="bg-white rounded-xl p-4 border border-[#F0EBE1] flex flex-col gap-2"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <p className="font-medium text-[#1C1008] text-sm">{item.name}</p>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-[#1E3D1A] text-white capitalize">
+                          {item.variant}
+                        </span>
+                        {item.addOns.length > 0 && (
+                          <div className="mt-1.5 space-y-0.5">
+                            {item.addOns.map(addon => (
+                              <p key={addon.name} className="text-xs text-[#1C1008]/50">
+                                + {addon.name}{' '}
+                                <span className="text-[#B8692E]">+RM{addon.price.toFixed(2)}</span>
+                              </p>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                      <button
+                        onClick={() => removeItem(item.cartId)}
+                        className="p-1 rounded-full hover:bg-red-50 transition"
+                        aria-label={`Remove ${item.name}`}
+                      >
+                        <Trash2 size={15} className="text-red-400" />
+                      </button>
                     </div>
-                    <button
-                      onClick={() => removeItem(item.name, item.variant)}
-                      className="p-1 rounded-full hover:bg-red-50 transition"
-                      aria-label={`Remove ${item.name}`}
-                    >
-                      <Trash2 size={15} className="text-red-400" />
-                    </button>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-[#1C1008]/50">x{item.quantity}</span>
-                    <p className="text-sm font-semibold text-[#B8692E]">
-                      RM{(item.price * item.quantity).toFixed(2)}
-                    </p>
-                  </div>
-                </li>
-              ))}
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-[#1C1008]/50">x{item.quantity}</span>
+                      <p className="text-sm font-semibold text-[#B8692E]">
+                        RM{lineTotal.toFixed(2)}
+                      </p>
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
           )}
 

@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { waLink } from "@/lib/whatsapp"
 import { coffeeItems, nonCoffeeItems, foodItems } from "@/lib/menuData"
 import MenuCard from "@/components/MenuCard"
 import AddOnsSection from "@/components/AddOnsSection"
@@ -49,6 +48,10 @@ export default function MenuPage() {
                 <MenuCard key={item.name} item={item} />
               ))}
             </div>
+            <div className="mt-8">
+              <p className="text-xs font-medium text-[#1C1008]/40 uppercase tracking-widest mb-3">Optional Add-ons</p>
+              <AddOnsSection />
+            </div>
           </section>
         </AnimateOnScroll>
 
@@ -72,7 +75,7 @@ export default function MenuPage() {
           <section id="food">
             <div className="border-l-4 border-[#B8692E] pl-4 mb-8">
               <h2 className="font-heading text-3xl md:text-4xl text-[#1C1008] italic">Food</h2>
-              <p className="text-[#1C1008]/50 text-sm mt-1">Available at events — ask us</p>
+              <p className="text-[#1C1008]/50 text-sm mt-1">Available for selected events and catering requests.</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {foodItems.map((item) => (
@@ -82,32 +85,6 @@ export default function MenuPage() {
           </section>
         </AnimateOnScroll>
 
-        {/* Add-ons */}
-        <AnimateOnScroll>
-          <section>
-            <div className="border-l-4 border-[#B8692E] pl-4 mb-8">
-              <h2 className="font-heading text-3xl md:text-4xl text-[#1C1008] italic">Add-ons</h2>
-            </div>
-            <AddOnsSection />
-          </section>
-        </AnimateOnScroll>
-
-        {/* Bottom CTA */}
-        <AnimateOnScroll>
-          <section className="bg-[#FFFEF9] rounded-2xl shadow-sm border border-[#F0EBE1] px-8 py-10 text-center">
-            <p className="text-[#1C1008] font-medium text-lg">
-              Not sure what to order?{" "}
-              <a
-                href={waLink("Hi MakCik Barista! Boleh tolong suggest menu yang best? 😊")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#1E3D1A] font-semibold underline underline-offset-4 hover:text-[#2D5A27] transition-colors"
-              >
-                Chat with us
-              </a>
-            </p>
-          </section>
-        </AnimateOnScroll>
       </div>
     </div>
   )
