@@ -34,7 +34,7 @@ export default function CoffeePicker({ name, hotPrice, icedPrice, onClose, onAdd
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 z-[95] bg-black/40"
+        className="fixed inset-0 z-[95] bg-black/15 backdrop-blur-[2px]"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -44,7 +44,7 @@ export default function CoffeePicker({ name, hotPrice, icedPrice, onClose, onAdd
         role="dialog"
         aria-modal="true"
         aria-label={`Add ${name} to cart`}
-        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[96] w-[calc(100vw-2rem)] max-w-sm bg-[#FAF7F2] rounded-2xl shadow-2xl flex flex-col"
+        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[96] w-[calc(100vw-2rem)] max-w-sm bg-[#FAF7F2] border border-[#1C1008]/8 rounded-3xl shadow-[0_8px_40px_rgba(28,16,8,0.10),0_2px_8px_rgba(28,16,8,0.06)] flex flex-col"
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 pt-5 pb-4 border-b border-[#F0EBE1]">

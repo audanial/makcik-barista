@@ -28,7 +28,7 @@ export default function MenuPage() {
 
       <div className="max-w-6xl mx-auto px-4 py-16 space-y-20">
         {/* Pricing disclaimer */}
-        <div className="bg-[#1E3D1A]/5 border border-[#1E3D1A]/10 rounded-2xl px-6 py-4 max-w-3xl mx-auto !mb-0 !mt-0 text-center">
+        <div className="bg-[#1E3D1A]/5 border border-[#1E3D1A]/10 rounded-2xl px-6 py-4 max-w-3xl mx-auto mb-8 !mt-0 text-center">
           <p className="text-sm text-[#1C1008]/70">
             💡 Prices shown are for regular &amp; delivery orders.
             <span className="text-[#B8692E] font-medium"> Event pricing may vary</span> based on location, pax and duration —
