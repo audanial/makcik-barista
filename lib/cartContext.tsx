@@ -24,9 +24,12 @@ export type DeliveryInfo = {
   notes: string
 }
 
+type AddItemInput = Omit<CartItem, 'cartId' | 'quantity'> & { addOns?: CartAddOn[] }
+type AddItemOpts = { qty?: number; forceNew?: boolean }
+
 type CartContextType = {
   items: CartItem[]
-  addItem: (item: Omit<CartItem, 'cartId' | 'quantity' | 'addOns'>, forceNew?: boolean) => void
+  addItem: (item: AddItemInput, opts?: AddItemOpts) => void
   removeItem: (cartId: string) => void
   updateQty: (cartId: string, qty: number) => void
   toggleAddOn: (cartId: string, addOn: CartAddOn) => void
@@ -61,18 +64,28 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [orderType, setOrderType] = useState<'delivery' | 'pickup'>('delivery')
   const [isCartOpen, setIsCartOpen] = useState(false)
 
-  const addItem = (item: Omit<CartItem, 'cartId' | 'quantity' | 'addOns'>, forceNew = false) => {
+  const addItem = (item: AddItemInput, { qty = 1, forceNew = false }: AddItemOpts = {}) => {
+    const addOns = item.addOns ?? []
     setItems(prev => {
-      if (!forceNew) {
-        // Deduplicate: find an existing plain entry (no add-ons) for same name+variant
+      if (!forceNew && addOns.length === 0) {
+        // Dedup: merge into existing plain entry of the same name+variant
         const existing = prev.find(
           i => i.name === item.name && i.variant === item.variant && i.addOns.length === 0
         )
         if (existing) {
-          return prev.map(i => i.cartId === existing.cartId ? { ...i, quantity: i.quantity + 1 } : i)
+          return prev.map(i =>
+            i.cartId === existing.cartId ? { ...i, quantity: i.quantity + qty } : i
+          )
         }
       }
-      return [...prev, { ...item, cartId: genCartId(), quantity: 1, addOns: [] }]
+      return [...prev, {
+        name: item.name,
+        price: item.price,
+        variant: item.variant,
+        addOns,
+        cartId: genCartId(),
+        quantity: qty,
+      }]
     })
   }
 
