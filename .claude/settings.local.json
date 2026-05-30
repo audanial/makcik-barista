@@ -12,7 +12,8 @@
       "Bash(Get-Content components/MenuCard.tsx)",
       "Bash(Get-Content components/Footer.tsx)",
       "Bash(Get-Content components/WhatsAppButton.tsx)",
-      "Bash(dir \"c:\\\\Users\\\\amir umar danial\\\\makcik-barista\\\\public\\\\images\" /b)"
+      "Bash(dir \"c:\\\\Users\\\\amir umar danial\\\\makcik-barista\\\\public\\\\images\" /b)",
+      "PowerShell(npm *)"
     ]
   }
 }
