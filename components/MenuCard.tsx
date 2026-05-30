@@ -72,9 +72,9 @@ export default function MenuCard({ item }: { item: MenuItem }) {
 
   const handleAdd = () => {
     if (category === 'coffee') { setPickerOpen(true); return }
-    if (icedPrice != null) addItem({ name, price: icedPrice, variant: 'iced' })
-    else if (hotPrice != null) addItem({ name, price: hotPrice, variant: 'hot' })
-    else if (price != null) addItem({ name, price, variant: 'single' })
+    if (icedPrice != null) addItem({ name, price: icedPrice, variant: 'iced', addOns: [] })
+    else if (hotPrice != null) addItem({ name, price: hotPrice, variant: 'hot', addOns: [] })
+    else if (price != null) addItem({ name, price, variant: 'single', addOns: [] })
   }
 
   return (
